@@ -1,5 +1,8 @@
+import lombok.extern.slf4j.Slf4j;
+
 import static java.util.Objects.isNull;
 
+@Slf4j
 public class Horse {
 
     private final String name;
@@ -8,11 +11,14 @@ public class Horse {
 
     public Horse(String name, double speed, double distance) {
         if (isNull(name)) {
+            log.error("Horses list is null");
             throw new IllegalArgumentException("Name cannot be null.");
         } else if (name.isBlank()) {
+            log.error("Horses list is blank");
             throw new IllegalArgumentException("Name cannot be blank.");
         }
         if (speed < 0) {
+            log.error("Speed is negative");
             throw new IllegalArgumentException("Speed cannot be negative.");
         }
         if (distance < 0) {
@@ -22,6 +28,7 @@ public class Horse {
         this.name = name;
         this.speed = speed;
         this.distance = distance;
+        log.debug("Создание Horse, имя [{}], скорость [{}]", name, speed);
     }
 
     public Horse(String name, double speed) {
